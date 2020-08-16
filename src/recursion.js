@@ -188,6 +188,7 @@ var palindrome = function(string) {
       //we make it an array
       var string = string.split('');
       var right = string.pop();
+      //capture it before removing by shift()
       var leftReal = string[0];
       var left = string.shift();
       var string = string.join('');
@@ -203,12 +204,55 @@ var palindrome = function(string) {
 // modulo(5,2) // 1
 // modulo(17,5) // 2
 // modulo(22,6) // 4
+//we need positive case and negative one!
 var modulo = function(x, y) {
+  var lastCase = x + y + y === 0;
+  var okay = -0;
+  if ( lastCase && x!== 0 & y!==0 ) { return okay; } 
+  if (x ===0 && y ===0) {
+    return NaN;
+  }
+  if (x >= 0 || y >= 0) {
+    if ( x < y) {
+      return x;
+    }
+    var left= x;
+    var left = x -y;
+    return left, modulo(x - y, y)
+  }
+  if (x < 0 ) {
+    if (x < y && y >0) {     
+      return x;
+    }
+    if (x < 0 && y < 0) {
+      if (x > y) {
+        return x 
+      }
+      if (y > x) { 
+        var left = x;
+        var left = x-y;
+        return left, modulo(x -y, y)
+      }
+    }
+  }
 };
 
-// 12. Write a function that multiplies two numbers without using the * operator or
+// 12. Write a function that multiplies two numbers without using the multiply operator or
 // Math methods.
 var multiply = function(x, y) {
+  //we want to make the order correct
+
+  // return for a negative
+  if (y === 1 || x === 0 || y === -1) {
+    return x
+  }
+  // if not reached zero keep adding
+  //positive cases
+  if (!x.toString().includes('-')) {
+    return x + multiply(x, y - 1)
+  }
+  //negative cases
+  return x + multiply(x, y - 1)
 };
 
 // 13. Write a function that divides two numbers without using the / operator or
